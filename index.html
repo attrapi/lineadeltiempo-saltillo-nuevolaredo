@@ -1,193 +1,147 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rutas ferroviarias</title>
+  <title>Timeline ARTF</title>
+
+  <!-- CSS oficial de TimelineJS -->
+  <link title="timeline-styles" rel="stylesheet"
+        href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+
+  <!-- TUS ESTILOS PERSONALIZADOS -->
   <style>
     :root {
-      /* Color institucional base */
-      --color-base: #691C32;
-      --color-base-dark: #3e111f;
-      --color-base-light: #8c2745;
-      --color-texto: #f9fafb;
-      --color-borde: #facc15;  /* acento amarillo suave */
+      /* Colores institucionales EXACTOS */
+      --color-institucional: #691c32;      /* vino principal */
+      --color-institucional-sec: #96606f;  /* derivado que combine */
+      --color-link: #96606f;               /* color de links en texto */
     }
 
-    * {
-      box-sizing: border-box;
+    /* ========= CUADROS DE EVENTOS (TIMENAV) ========= */
+    .tl-timemarker-content-container,
+    .tl-timemarker-content-container-long,
+    .tl-timemarker-content-container-small {
+      background-color: var(--color-institucional);
+      color: #ffffff;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.15);
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden; /* sin scroll vertical ni horizontal */
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--color-base-dark);
-      color: var(--color-texto);
+    /* EVENTOS QUE TIENEN RANGO (with-end) */
+    .tl-timemarker.tl-timemarker-with-end
+      .tl-timemarker-content-container,
+    .tl-timemarker.tl-timemarker-with-end
+      .tl-timemarker-content-container-long,
+    .tl-timemarker.tl-timemarker-with-end
+      .tl-timemarker-content-container-small {
+      background-color: var(--color-institucional-sec);
     }
 
-    .page {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* BANNER: contenedor flex para centrar la imagen */
-    .banner {
-      flex: 1 1 auto;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;  /* centra horizontal */
-      align-items: center;      /* centra vertical */
-    }
-
-    .banner img {
-      width: 50%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      margin: 0 auto;
-    }
-
-    .banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.25),
-        rgba(0, 0, 0, 0.15),
-        rgba(0, 0, 0, 0.4)
-      );
-      pointer-events: none;
-    }
-
-    /* Franja de botones */
-    .routes {
-      flex: 0 0 auto;
-      padding: 1rem 1.5rem;
-      background: linear-gradient(
-        to right,
-        var(--color-base-dark),
-        var(--color-base)
-      );
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 4vh; /* sube los botones un poco */
-      position: relative;
-      z-index: 2;
-    }
-
-    .routes-inner {
-      width: 100%;
-      max-width: 900px;
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .route-btn {
-      flex: 1 1 0;
-      max-width: 360px;
-      padding: 0.9rem 1.4rem;
-      border-radius: 999px;
-      border: 1px solid var(--color-borde);
-      color: var(--color-texto);
-      font-size: 0.95rem;
+    /* ========= LINKS DENTRO DEL TEXTO DE LAS DIAPOSITIVAS ========= */
+    .tl-slide .tl-text-content a {
+      color: var(--color-link);
+      text-decoration: none;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      border-bottom: 1px dashed var(--color-link);
+    }
+
+    .tl-slide .tl-text-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========= ACORDEONES (LISTAS DESPLEGABLES) ========= */
+
+    /* Contenedor general del acordeón */
+    .tl-slide .tl-text-content .accordion {
+      margin: 0.4em 0 0.6em 0;
+    }
+
+    /* Cabecera clicable (el "botón") */
+    .tl-slide .tl-text-content .accordion-summary {
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      font-weight: 600;
+      padding: 0.25em 0.6em;
+      border-radius: 4px;
+      display: inline-block;
+      background: var(--color-institucional-sec);
+      color: #ffffff;
+      user-select: none;
+    }
+
+    /* Cuerpo con la lista que se abre/cierra */
+    .tl-slide .tl-text-content .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-4px);
       transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        filter 0.18s ease-out;
+        max-height 0.35s ease,
+        opacity 0.35s ease,
+        transform 0.35s ease;
+      margin-top: 0.25em;
+    }
+
+    /* Cuando el acordeón está abierto */
+    .tl-slide .tl-text-content .accordion.is-open .accordion-body {
+      max-height: 500px; /* súbelo si llegas a tener listas muy largas */
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Listas internas un poquito sangradas */
+    .tl-slide .tl-text-content .accordion-body ul {
+      margin: 0.3em 0 0 1.2em;
+      padding-left: 0;
+    }
+    .tl-credit{
+      display:none;
+    }
+    .tl-caption{
+      display:none;
+    }
+    .tl-timeline h2.tl-headline-title {
       white-space: nowrap;
-      background: linear-gradient(135deg, var(--color-base-light), var(--color-base));
-      text-decoration: none;   /* que no se vea como link normal */
     }
 
-    .route-btn.saltillo {
-      background: linear-gradient(135deg, var(--color-base), var(--color-base-dark));
-    }
-
-    .route-btn span.bullet {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 2px solid #e5e7eb;
-    }
-
-    .route-btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-      filter: brightness(1.05);
-    }
-
-    .route-btn:active {
-      transform: translateY(0) scale(0.99);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-      filter: brightness(0.98);
-    }
-
-    /* Responsive para pantallas chicas */
-    @media (max-width: 640px) {
-      .routes {
-        padding: 0.8rem 1rem;
-        margin-bottom: 3vh;
-      }
-
-      .routes-inner {
-        flex-direction: column;
-      }
-
-      .banner img {
-        width: 70%;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <!-- BANNER: cambia la ruta de la imagen -->
-    <div class="banner">
-      <img src="mapa-tren.png" alt="Mapa ferroviario" />
-    </div>
+  <!-- Aquí se dibuja la timeline -->
+  <div id="timeline-embed" style="width:100%; height:650px;"></div>
 
-    <!-- BOTONES DE RUTAS (ENLACES) -->
-    <div class="routes">
-      <div class="routes-inner">
-        <a
-          class="route-btn queretaro"
-          href="https://attrapi.github.io/lineadeltiempo/"
-          target="_blank"
-        >
-          <span class="bullet"></span>
-          <span>Tren Querétaro - Irapuato</span>
-        </a>
+  <!-- JS de TimelineJS -->
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <script>
+    // Tu "source" sacado del iframe (ya decodificado)
+    var source = "v2:2PACX-1vTrhzy-gOn-UThOEccNA7-5ijY_ln-13xyFrHTlreZAJ0aGprAysbyfkzcWrr94FcZoDQTi3zowxELi";
 
-        <a
-          class="route-btn saltillo"
-          href="https://ejemplo.com/saltillo-nuevo-laredo"
-          target="_blank"
-        >
-          <span class="bullet"></span>
-          <span>Tren Saltillo - Nuevo Laredo</span>
-        </a>
-      </div>
-    </div>
-  </div>
+    // Crear timeline en el div "timeline-embed"
+    window.timeline = new TL.Timeline("timeline-embed", source, {
+      language: "es",
+      initial_zoom: 2,
+      font: "Default"
+    });
+
+    // ========= LÓGICA DEL ACORDEÓN (TRANSICIÓN SUAVE) =========
+    // Usamos delegación de eventos para que funcione aunque TimelineJS reprocesa el DOM
+    document.addEventListener('click', function (e) {
+      const summary = e.target.closest('.accordion-summary');
+      if (!summary) return; // Si no hizo click en un summary, salir
+
+      // Si hizo click en un enlace dentro del summary, dejamos que el link trabaje normal
+      if (e.target.tagName === 'A') {
+        return;
+      }
+
+      const accordion = summary.closest('.accordion');
+      if (!accordion) return;
+
+      accordion.classList.toggle('is-open');
+    });
+  </script>
 </body>
 </html>
+
+
+
