@@ -94,31 +94,164 @@
       margin: 0.3em 0 0 1.2em;
       padding-left: 0;
     }
-
     .tl-credit{
       display:none;
     }
-    .tl-caption{
-      display:none;
-    }
+  
     .tl-timeline h2.tl-headline-title {
       white-space: nowrap;
     }
-   html , body {
-   background-color: #691C32;
-     }
-   }
+    html, body {
+    background-color: #691C32;  /* tu vino ARTF */
+    margin: 0;
+    padding: 0;
+  }
+    /* Poner el caption arriba de la foto */
+.tl-media .tl-caption{
+  position:absolute;
+  top:0; left:0; right:0;
+  margin:0;
+  padding:12px 16px;
+  background: rgba(105, 28, 50, .85); /* tu guinda */
+  color:#fff;
+  font-weight:700;
+  text-transform:uppercase;
+  z-index:20;
+}
+
+/* Para que no tape la imagen */
+.tl-media .tl-media-content{
+  padding-top:52px;
+}
+.titulo-foto{
+  font-size: x-large;   
+  margin-top: 20px;
+}
+/* Fondo detrás de la imagen (quita negro) */
+#timeline-embed .tl-media,
+#timeline-embed .tl-media-content-container,
+#timeline-embed .tl-media-content,
+#timeline-embed .tl-media-wrapper,
+#timeline-embed .tl-slide-content-container {
+  background: #691C32 !important; /* tu vino */
+}
+  #timeline-embed .tl-media .tl-caption{
+  width: 500px !important;
+  max-width: calc(100% - 24px) !important; /* para móvil */  
+  margin-top: 12px;
+    
+}
+    /* Ocultar iconitos en los time markers (nav) */
+#timeline-embed .tl-timemarker-media-container [class^="tl-icon-"],
+#timeline-embed .tl-timemarker-media-container [class*=" tl-icon-"]{
+  display: none !important;
+}
+/*Tarjeta Director de Querétaro - Irapuato*/
+    /* Tarjeta profesional para el Director */
+#timeline-embed .tl-slide .tl-text-content .role-card{
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-left: 4px solid var(--color-institucional-sec);
+  background: rgba(255,255,255,.06);
+}
+
+#timeline-embed .tl-slide .tl-text-content .role-title{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  opacity: .95;
+  margin-bottom: 4px;
+}
+
+#timeline-embed .tl-slide .tl-text-content .role-name{
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Por si quedan listas, quita viñetas dentro del slide */
+#timeline-embed .tl-slide .tl-text-content ul{
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+/* Tarjetas de residentes */
+#timeline-embed .tl-slide .tl-text-content .resident-card{
+  margin: 12px 0;
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.05);
+}
+
+/* Línea separadora dentro de cada tarjeta (si usas hr) */
+#timeline-embed .tl-slide .tl-text-content .resident-card hr{
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.18);
+  margin: 10px 0;
+}
+
+/* Opcional: que el texto largo de empresas sea más legible */
+#timeline-embed .tl-slide .tl-text-content .resident-card td{
+  line-height: 1.25;
+}
+
+    /* Separación automática entre tarjetas */
+#timeline-embed .tl-slide .tl-text-content .resident-card{
+  margin: 14px 0;
+}
+
+/* Si quieres una línea solo entre tarjetas (no arriba/abajo) */
+#timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card{
+  position: relative;
+  padding-top: 14px;
+}
+#timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card:before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background: rgba(255,255,255,.18);
+}
+    /*Dividers*/
+    #timeline-embed .tl-slide .tl-text-content .divider{
+  height: 1px;
+  margin: 14px 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0),
+    rgba(255,255,255,.28),
+    rgba(255,255,255,0)
+  );
+}
+    /* SOLO para la diapositiva marcada como .slide-2 */
+#timeline-embed .tl-slide:has(.slide-2) .tl-media .tl-media-content{
+  padding-top: 1px !important;  /* o 0px */
+}
+
+
+
+
+
+
+
+
   </style>
 </head>
 <body>
   <!-- Aquí se dibuja la timeline -->
   <div id="timeline-embed" style="width:100%; height:650px;"></div>
 
+
+
   <!-- JS de TimelineJS -->
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
   <script>
-    // Nuevo "source" tomado del iframe que me pasaste (ya decodificado)
-    var source = "v2:2PACX-1vT0TsAEmGMD1pFz4aerLnKBQs79ECB5-GLLaBS9fRdRYAhm-gJbJ3kwZiiCRzGofObbSl-m0xulBiPK";
+    // Tu "source" sacado del iframe (ya decodificado)
+    var source = "v2:2PACX-1vTrhzy-gOn-UThOEccNA7-5ijY_ln-13xyFrHTlreZAJ0aGprAysbyfkzcWrr94FcZoDQTi3zowxELi";
 
     // Crear timeline en el div "timeline-embed"
     window.timeline = new TL.Timeline("timeline-embed", source, {
@@ -146,6 +279,25 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
