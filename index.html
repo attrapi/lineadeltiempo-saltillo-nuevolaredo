@@ -231,17 +231,38 @@
 #timeline-embed .tl-slide:has(.slide-2) .tl-media .tl-media-content{
   padding-top: 1px !important;  /* o 0px */
 }
+.timeline-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 12px 0;
+}
 
+.timeline-button {
+  background: var(--color-institucional-sec);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 6px 12px;
+  text-transform: uppercase;
+}
 
-
-
-
-
-
+.timeline-button:hover {
+  background: var(--color-institucional);
+}
 
   </style>
 </head>
 <body>
+  <div class="timeline-controls">
+  <button class="timeline-button" id="toggle-timeline" type="button">
+    Mostrar completo
+  </button>
+</div>
   <!-- Aquí se dibuja la timeline -->
   <div id="timeline-embed" style="width:100%; height:650px;"></div>
 
@@ -279,6 +300,7 @@
   </script>
 </body>
 </html>
+
 
 
 
