@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="favicon-tren-691C32-32.png" sizes="32x32">
   <title>Timeline ARTF</title>
 
@@ -94,179 +95,257 @@
       margin: 0.3em 0 0 1.2em;
       padding-left: 0;
     }
+
     .tl-credit{
       display:none;
     }
-  
+
     .tl-timeline h2.tl-headline-title {
       white-space: nowrap;
     }
+
     html, body {
-    background-color: #691C32;  /* tu vino ARTF */
-    margin: 0;
-    padding: 0;
-  }
+      background-color: #691C32;  /* tu vino ARTF */
+      margin: 0;
+      padding: 0;
+    }
+
     /* Poner el caption arriba de la foto */
-.tl-media .tl-caption{
-  position:absolute;
-  top:0; left:0; right:0;
-  margin:0;
-  padding:12px 16px;
-  background: rgba(105, 28, 50, .85); /* tu guinda */
-  color:#fff;
-  font-weight:700;
-  text-transform:uppercase;
-  z-index:20;
-}
+    .tl-media .tl-caption{
+      position:absolute;
+      top:0; left:0; right:0;
+      margin:0;
+      padding:12px 16px;
+      background: rgba(105, 28, 50, .85); /* tu guinda */
+      color:#fff;
+      font-weight:700;
+      text-transform:uppercase;
+      z-index:20;
+    }
 
-/* Para que no tape la imagen */
-.tl-media .tl-media-content{
-  padding-top:52px;
-}
-.titulo-foto{
-  font-size: x-large;   
-  margin-top: 20px;
-}
-/* Fondo detrás de la imagen (quita negro) */
-#timeline-embed .tl-media,
-#timeline-embed .tl-media-content-container,
-#timeline-embed .tl-media-content,
-#timeline-embed .tl-media-wrapper,
-#timeline-embed .tl-slide-content-container {
-  background: #691C32 !important; /* tu vino */
-}
-  #timeline-embed .tl-media .tl-caption{
-  width: 500px !important;
-  max-width: calc(100% - 24px) !important; /* para móvil */  
-  margin-top: 12px;
-    
-}
+    /* Para que no tape la imagen */
+    .tl-media .tl-media-content{
+      padding-top:52px;
+    }
+
+    .titulo-foto{
+      font-size: x-large;
+      margin-top: 20px;
+    }
+
+    /* Fondo detrás de la imagen (quita negro) */
+    #timeline-embed .tl-media,
+    #timeline-embed .tl-media-content-container,
+    #timeline-embed .tl-media-content,
+    #timeline-embed .tl-media-wrapper,
+    #timeline-embed .tl-slide-content-container {
+      background: #691C32 !important; /* tu vino */
+    }
+
+    #timeline-embed .tl-media .tl-caption{
+      width: 500px !important;
+      max-width: calc(100% - 24px) !important; /* para móvil */
+      margin-top: 12px;
+    }
+
     /* Ocultar iconitos en los time markers (nav) */
-#timeline-embed .tl-timemarker-media-container [class^="tl-icon-"],
-#timeline-embed .tl-timemarker-media-container [class*=" tl-icon-"]{
-  display: none !important;
-}
-/*Tarjeta Director de Querétaro - Irapuato*/
+    #timeline-embed .tl-timemarker-media-container [class^="tl-icon-"],
+    #timeline-embed .tl-timemarker-media-container [class*=" tl-icon-"]{
+      display: none !important;
+    }
+
+    /*Tarjeta Director de Querétaro - Irapuato*/
     /* Tarjeta profesional para el Director */
-#timeline-embed .tl-slide .tl-text-content .role-card{
-  margin: 10px 0;
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,.22);
-  border-left: 4px solid var(--color-institucional-sec);
-  background: rgba(255,255,255,.06);
-}
+    #timeline-embed .tl-slide .tl-text-content .role-card{
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-left: 4px solid var(--color-institucional-sec);
+      background: rgba(255,255,255,.06);
+    }
 
-#timeline-embed .tl-slide .tl-text-content .role-title{
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-  opacity: .95;
-  margin-bottom: 4px;
-}
+    #timeline-embed .tl-slide .tl-text-content .role-title{
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      opacity: .95;
+      margin-bottom: 4px;
+    }
 
-#timeline-embed .tl-slide .tl-text-content .role-name{
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.1;
-}
+    #timeline-embed .tl-slide .tl-text-content .role-name{
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
 
-/* Por si quedan listas, quita viñetas dentro del slide */
-#timeline-embed .tl-slide .tl-text-content ul{
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-/* Tarjetas de residentes */
-#timeline-embed .tl-slide .tl-text-content .resident-card{
-  margin: 12px 0;
-  padding: 10px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.05);
-}
+    /* Por si quedan listas, quita viñetas dentro del slide */
+    #timeline-embed .tl-slide .tl-text-content ul{
+      list-style: none;
+      padding-left: 0;
+      margin-left: 0;
+    }
 
-/* Línea separadora dentro de cada tarjeta (si usas hr) */
-#timeline-embed .tl-slide .tl-text-content .resident-card hr{
-  border: 0;
-  border-top: 1px solid rgba(255,255,255,.18);
-  margin: 10px 0;
-}
+    /* Tarjetas de residentes */
+    #timeline-embed .tl-slide .tl-text-content .resident-card{
+      margin: 12px 0;
+      padding: 10px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.05);
+    }
 
-/* Opcional: que el texto largo de empresas sea más legible */
-#timeline-embed .tl-slide .tl-text-content .resident-card td{
-  line-height: 1.25;
-}
+    /* Línea separadora dentro de cada tarjeta (si usas hr) */
+    #timeline-embed .tl-slide .tl-text-content .resident-card hr{
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,.18);
+      margin: 10px 0;
+    }
+
+    /* Opcional: que el texto largo de empresas sea más legible */
+    #timeline-embed .tl-slide .tl-text-content .resident-card td{
+      line-height: 1.25;
+    }
 
     /* Separación automática entre tarjetas */
-#timeline-embed .tl-slide .tl-text-content .resident-card{
-  margin: 14px 0;
-}
+    #timeline-embed .tl-slide .tl-text-content .resident-card{
+      margin: 14px 0;
+    }
 
-/* Si quieres una línea solo entre tarjetas (no arriba/abajo) */
-#timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card{
-  position: relative;
-  padding-top: 14px;
-}
-#timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card:before{
-  content:"";
-  position:absolute;
-  top:0; left:0; right:0;
-  height:1px;
-  background: rgba(255,255,255,.18);
-}
+    /* Si quieres una línea solo entre tarjetas (no arriba/abajo) */
+    #timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card{
+      position: relative;
+      padding-top: 14px;
+    }
+    #timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card:before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:1px;
+      background: rgba(255,255,255,.18);
+    }
+
     /*Dividers*/
     #timeline-embed .tl-slide .tl-text-content .divider{
-  height: 1px;
-  margin: 14px 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0),
-    rgba(255,255,255,.28),
-    rgba(255,255,255,0)
-  );
-}
+      height: 1px;
+      margin: 14px 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0),
+        rgba(255,255,255,.28),
+        rgba(255,255,255,0)
+      );
+    }
+
     /* SOLO para la diapositiva marcada como .slide-2 */
-#timeline-embed .tl-slide:has(.slide-2) .tl-media .tl-media-content{
-  padding-top: 1px !important;  /* o 0px */
-}
-.timeline-controls {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 10px 12px 0;
-}
+    #timeline-embed .tl-slide:has(.slide-2) .tl-media .tl-media-content{
+      padding-top: 1px !important;  /* o 0px */
+    }
 
-.timeline-button {
-  background: var(--color-institucional-sec);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 6px;
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  padding: 6px 12px;
-  text-transform: uppercase;
-}
+    /* (lo de arriba lo dejo igual) */
+    .timeline-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 10px 12px 0;
+    }
 
-.timeline-button:hover {
-  background: var(--color-institucional);
-}
+    .timeline-button {
+      background: var(--color-institucional-sec);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 6px;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      padding: 6px 12px;
+      text-transform: uppercase;
+    }
 
+    .timeline-button:hover {
+      background: var(--color-institucional);
+    }
+
+    /* ==============================
+       ✅ SOLO LO NUEVO DEL TOGGLE
+       ============================== */
+
+    /* Wrap para posicionar el botón “como el otro” */
+    .timeline-wrap{
+      width: 100%;
+      height: 650px;     /* tu altura original */
+      overflow: hidden;
+      position: relative;
+    }
+
+    #timeline-embed{
+      width: 100%;
+      height: 100%;
+    }
+
+    /* evitar “blancos” cuando se oculta */
+    #timeline-embed .tl-timeline,
+    #timeline-embed .tl-storyslider,
+    #timeline-embed .tl-storyslider .tl-slider-container{
+      background: #691C32 !important;
+    }
+
+    /* OCULTAR solo el bloque inferior (fechas) */
+    .timeline-wrap.is-collapsed #timeline-embed .tl-timenav,
+    .timeline-wrap.is-collapsed #timeline-embed .tl-timenav-wrapper,
+    .timeline-wrap.is-collapsed #timeline-embed .tl-timenav-container,
+    .timeline-wrap.is-collapsed #timeline-embed .tl-menubar{
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+    }
+
+    /* que el story use todo el alto cuando se oculta la barra */
+    .timeline-wrap.is-collapsed #timeline-embed .tl-storyslider{
+      bottom: 0 !important;
+      height: 100% !important;
+    }
+
+    /* Botón dentro del timeline, arriba de la barra de fechas */
+    .timeline-toggle{
+      position:absolute;
+      right: 14px;
+      bottom: var(--toggle-bottom, 130px); /* default */
+      z-index: 99999;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.45);
+      color:#fff;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      cursor:pointer;
+      backdrop-filter: blur(4px);
+    }
+    .timeline-toggle:hover{ background: rgba(0,0,0,.28); }
   </style>
 </head>
+
 <body>
-  <div class="timeline-controls">
-  <button class="timeline-button" id="toggle-timeline" type="button">
-    Mostrar completo
-  </button>
-</div>
+  <!-- (Dejo tu controls intacto, pero ya no lo usamos para el botón) -->
+  <div class="timeline-controls"></div>
+
   <!-- Aquí se dibuja la timeline -->
-  <div id="timeline-embed" style="width:100%; height:650px;"></div>
+  <div id="timeline-wrap" class="timeline-wrap">
+    <div id="timeline-embed"></div>
 
-
+    <!-- ✅ Botón dentro del timeline (como el otro) -->
+    <button class="timeline-toggle" id="toggle-timeline" type="button" aria-expanded="true">
+      OCULTAR
+    </button>
+  </div>
 
   <!-- JS de TimelineJS -->
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
@@ -282,45 +361,88 @@
     });
 
     // ========= LÓGICA DEL ACORDEÓN (TRANSICIÓN SUAVE) =========
-    // Usamos delegación de eventos para que funcione aunque TimelineJS reprocesa el DOM
     document.addEventListener('click', function (e) {
       const summary = e.target.closest('.accordion-summary');
-      if (!summary) return; // Si no hizo click en un summary, salir
-
-      // Si hizo click en un enlace dentro del summary, dejamos que el link trabaje normal
-      if (e.target.tagName === 'A') {
-        return;
-      }
+      if (!summary) return;
+      if (e.target.tagName === 'A') return;
 
       const accordion = summary.closest('.accordion');
       if (!accordion) return;
 
       accordion.classList.toggle('is-open');
     });
+
+    /* ========= ✅ TOGGLE (OCULTAR / MOSTRAR COMPLETO) + posición del botón ========= */
+    const wrap = document.getElementById('timeline-wrap');
+    const btn  = document.getElementById('toggle-timeline');
+
+    function refreshTimelineHard(){
+      requestAnimationFrame(() => {
+        void wrap.offsetHeight;
+        window.timeline?.updateDisplay?.();
+        setTimeout(() => window.timeline?.updateDisplay?.(), 60);
+      });
+    }
+
+    // Pone el botón justo arriba de la barra de fechas (timenav)
+    function updateToggleOffset(){
+      // Si está colapsado (sin timenav), botón abajo
+      if (wrap.classList.contains('is-collapsed')) {
+        wrap.style.setProperty('--toggle-bottom', '10px');
+        return true;
+      }
+
+      const nav = document.querySelector('#timeline-embed .tl-timenav');
+      const gap = 10;
+      if (!nav) return false;
+
+      const navH = Math.ceil(nav.getBoundingClientRect().height);
+      if (navH <= 0) return false;
+
+      wrap.style.setProperty('--toggle-bottom', (navH + gap) + 'px');
+      return true;
+    }
+
+    // Asegurar desde el PRIMER render que el botón quede arriba
+    (function ensureFirstCorrectButtonPosition(){
+      let tries = 0;
+      const maxTries = 240; // ~4s
+
+      const tick = () => {
+        tries++;
+        const ok = updateToggleOffset();
+        if (ok || tries >= maxTries) return;
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    })();
+
+    // Observer por si TimelineJS re-renderiza el DOM
+    const embed = document.getElementById('timeline-embed');
+    const mo = new MutationObserver(() => updateToggleOffset());
+    mo.observe(embed, { childList: true, subtree: true });
+
+    btn.addEventListener('click', () => {
+      const willCollapse = !wrap.classList.contains('is-collapsed');
+      wrap.classList.toggle('is-collapsed', willCollapse);
+
+      if (willCollapse) {
+        btn.textContent = 'MOSTRAR COMPLETO';
+        btn.setAttribute('aria-expanded', 'false');
+        wrap.style.setProperty('--toggle-bottom', '10px');
+      } else {
+        btn.textContent = 'OCULTAR';
+        btn.setAttribute('aria-expanded', 'true');
+        updateToggleOffset();
+      }
+
+      refreshTimelineHard();
+    });
+
+    window.addEventListener('resize', () => {
+      updateToggleOffset();
+      refreshTimelineHard();
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
