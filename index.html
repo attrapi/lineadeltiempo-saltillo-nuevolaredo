@@ -12,211 +12,216 @@
 
   <!-- TUS ESTILOS PERSONALIZADOS -->
   <style>
-    :root {
-      /* Colores institucionales EXACTOS */
-      --color-institucional: #691c32;      /* vino principal */
-      --color-institucional-sec: #96606f;  /* derivado que combine */
-      --color-link: #96606f;               /* color de links en texto */
+    :root{
+      /* Colores institucionales */
+      --color-institucional:#691c32;      /* vino */
+      --color-institucional-sec:#96606f;  /* derivado */
+      --color-link:#96606f;
+
+      /* franja guinda inferior */
+      --franja-guinda:70px;
+
+      /* TABLAS PRO */
+      --t-line: rgba(255,255,255,.22);
+      --t-line-strong: rgba(255,255,255,.45);
+      --t-bg: rgba(255,255,255,.05);
+      --t-bg-2: rgba(0,0,0,.12);
+      --t-bg-3: rgba(255,255,255,.03);
+      --t-txt:#fff;
+      --t-txt-2: rgba(255,255,255,.88);
+      --t-radius:14px;
     }
 
     /* ========= CUADROS DE EVENTOS (TIMENAV) ========= */
     .tl-timemarker-content-container,
     .tl-timemarker-content-container-long,
-    .tl-timemarker-content-container-small {
+    .tl-timemarker-content-container-small{
       background-color: var(--color-institucional);
-      color: #ffffff;
-      border-radius: 4px;
-      border: 1px solid rgba(0,0,0,0.15);
+      color:#fff;
+      border-radius:4px;
+      border:1px solid rgba(0,0,0,0.15);
     }
-
-    /* EVENTOS QUE TIENEN RANGO (with-end) */
     .tl-timemarker.tl-timemarker-with-end
       .tl-timemarker-content-container,
     .tl-timemarker.tl-timemarker-with-end
       .tl-timemarker-content-container-long,
     .tl-timemarker.tl-timemarker-with-end
-      .tl-timemarker-content-container-small {
+      .tl-timemarker-content-container-small{
       background-color: var(--color-institucional-sec);
     }
 
-    /* ========= LINKS DENTRO DEL TEXTO DE LAS DIAPOSITIVAS ========= */
-    .tl-slide .tl-text-content a {
+    /* ========= LINKS EN TEXTO ========= */
+    .tl-text-content{
+      margin-top: 60px;
+    }
+    .tl-slide .tl-text-content a{
       color: var(--color-link);
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px dashed var(--color-link);
+      text-decoration:none;
+      font-weight:600;
+      border-bottom:1px dashed var(--color-link);
     }
+    .tl-slide .tl-text-content a:hover{ text-decoration:underline; }
 
-    .tl-slide .tl-text-content a:hover {
-      text-decoration: underline;
-    }
-
-    /* ========= ACORDEONES (LISTAS DESPLEGABLES) ========= */
-
-    /* Contenedor general del acordeón */
-    .tl-slide .tl-text-content .accordion {
-      margin: 0.4em 0 0.6em 0;
-    }
-
-    /* Cabecera clicable (el "botón") */
-    .tl-slide .tl-text-content .accordion-summary {
-      cursor: pointer;
-      font-weight: 600;
-      padding: 0.25em 0.6em;
-      border-radius: 4px;
-      display: inline-block;
+    /* ========= ACORDEONES ========= */
+    .tl-slide .tl-text-content .accordion{ margin: .4em 0 .6em 0; }
+    .tl-slide .tl-text-content .accordion-summary{
+      cursor:pointer;
+      font-weight:600;
+      padding:.25em .6em;
+      border-radius:4px;
+      display:inline-block;
       background: var(--color-institucional-sec);
-      color: #ffffff;
-      user-select: none;
+      color:#fff;
+      user-select:none;
     }
-
-    /* Cuerpo con la lista que se abre/cierra */
-    .tl-slide .tl-text-content .accordion-body {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
+    .tl-slide .tl-text-content .accordion-body{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
       transform: translateY(-4px);
-      transition:
-        max-height 0.35s ease,
-        opacity 0.35s ease,
-        transform 0.35s ease;
-      margin-top: 0.25em;
+      transition: max-height .35s ease, opacity .35s ease, transform .35s ease;
+      margin-top:.25em;
     }
-
-    /* Cuando el acordeón está abierto */
-    .tl-slide .tl-text-content .accordion.is-open .accordion-body {
-      max-height: 500px; /* súbelo si llegas a tener listas muy largas */
-      opacity: 1;
+    .tl-slide .tl-text-content .accordion.is-open .accordion-body{
+      max-height:500px;
+      opacity:1;
       transform: translateY(0);
     }
-
-    /* Listas internas un poquito sangradas */
-    .tl-slide .tl-text-content .accordion-body ul {
-      margin: 0.3em 0 0 1.2em;
-      padding-left: 0;
+    .tl-slide .tl-text-content .accordion-body ul{
+      margin:.3em 0 0 1.2em;
+      padding-left:0;
     }
 
-    .tl-credit{
-      display:none;
+    /* ========= BASE ========= */
+    html, body{
+      background:#691C32;
+      margin:0;
+      padding:0;
     }
 
-    .tl-timeline h2.tl-headline-title {
-      white-space: nowrap;
+    /* franja guinda fija abajo (atrás) */
+    body::after{
+      content:"";
+      position:fixed;
+      left:0; right:0; bottom:0;
+      height: var(--franja-guinda);
+      background:#691C32;
+      pointer-events:none;
+      z-index:-1;
     }
 
-    html, body {
-      background-color: #691C32;  /* tu vino ARTF */
-      margin: 0;
-      padding: 0;
-    }
+    .tl-timeline h2.tl-headline-title{ white-space:nowrap; }
 
-    /* Poner el caption arriba de la foto */
+    /* caption arriba de la foto */
     .tl-media .tl-caption{
       position:absolute;
       top:0; left:0; right:0;
       margin:0;
       padding:12px 16px;
-      background: rgba(105, 28, 50, .85); /* tu guinda */
+      background: rgba(105, 28, 50, .85);
       color:#fff;
       font-weight:700;
       text-transform:uppercase;
       z-index:20;
     }
+    /* para que el caption no tape imagen */
+    .tl-media .tl-media-content{ padding-top:52px; }
 
-    /* Para que no tape la imagen */
-    .tl-media .tl-media-content{
-      padding-top:52px;
-    }
-
+    /*.titulo-foto{ font-size:x-large; margin-top:20px; }*/
     .titulo-foto{
-      font-size: x-large;
-      margin-top: 20px;
-    }
+  
+  max-width: 100%;
+  padding: 10px 14px;
+  margin: 10px 0 14px;
+  font-size: large;
 
-    /* Fondo detrás de la imagen (quita negro) */
+  /* look institucional limpio */
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(0,0,0,.12);
+
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  line-height: 1.1;
+
+  /* ✅ mata cualquier “línea/sombra” */
+  box-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+
+
+    /* fondo guinda detrás de la imagen (quita negro) */
     #timeline-embed .tl-media,
     #timeline-embed .tl-media-content-container,
     #timeline-embed .tl-media-content,
     #timeline-embed .tl-media-wrapper,
-    #timeline-embed .tl-slide-content-container {
-      background: #691C32 !important; /* tu vino */
+    #timeline-embed .tl-slide-content-container{
+      background:#691C32 !important;
     }
-
     #timeline-embed .tl-media .tl-caption{
-      width: 500px !important;
-      max-width: calc(100% - 24px) !important; /* para móvil */
-      margin-top: 12px;
+      width:500px !important;
+      max-width: calc(100% - 24px) !important;
+      margin-top:8px;
     }
 
-    /* Ocultar iconitos en los time markers (nav) */
+    /* oculta iconitos en timemarkers */
     #timeline-embed .tl-timemarker-media-container [class^="tl-icon-"],
     #timeline-embed .tl-timemarker-media-container [class*=" tl-icon-"]{
-      display: none !important;
+      display:none !important;
     }
 
-    /*Tarjeta Director de Querétaro - Irapuato*/
-    /* Tarjeta profesional para el Director */
+    /* tarjetas */
     #timeline-embed .tl-slide .tl-text-content .role-card{
-      margin: 10px 0;
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,.22);
-      border-left: 4px solid var(--color-institucional-sec);
+      margin:10px 0;
+      padding:10px 12px;
+      border-radius:6px;
+      border:1px solid rgba(255,255,255,.22);
+      border-left:4px solid var(--color-institucional-sec);
       background: rgba(255,255,255,.06);
     }
-
     #timeline-embed .tl-slide .tl-text-content .role-title{
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      opacity: .95;
-      margin-bottom: 4px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      opacity:.95;
+      margin-bottom:4px;
     }
-
     #timeline-embed .tl-slide .tl-text-content .role-name{
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.1;
+      font-size:16px;
+      font-weight:700;
+      line-height:1.1;
     }
 
-    /* Por si quedan listas, quita viñetas dentro del slide */
+    /* quita viñetas dentro del slide */
     #timeline-embed .tl-slide .tl-text-content ul{
-      list-style: none;
-      padding-left: 0;
-      margin-left: 0;
+      list-style:none;
+      padding-left:0;
+      margin-left:0;
     }
 
-    /* Tarjetas de residentes */
+    /* resident cards */
     #timeline-embed .tl-slide .tl-text-content .resident-card{
-      margin: 12px 0;
-      padding: 10px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.18);
+      margin:14px 0;
+      padding:10px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.05);
     }
-
-    /* Línea separadora dentro de cada tarjeta (si usas hr) */
     #timeline-embed .tl-slide .tl-text-content .resident-card hr{
-      border: 0;
-      border-top: 1px solid rgba(255,255,255,.18);
-      margin: 10px 0;
+      border:0;
+      border-top:1px solid rgba(255,255,255,.18);
+      margin:10px 0;
     }
-
-    /* Opcional: que el texto largo de empresas sea más legible */
-    #timeline-embed .tl-slide .tl-text-content .resident-card td{
-      line-height: 1.25;
-    }
-
-    /* Separación automática entre tarjetas */
-    #timeline-embed .tl-slide .tl-text-content .resident-card{
-      margin: 14px 0;
-    }
-
-    /* Si quieres una línea solo entre tarjetas (no arriba/abajo) */
+    #timeline-embed .tl-slide .tl-text-content .resident-card td{ line-height:1.25; }
     #timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card{
-      position: relative;
-      padding-top: 14px;
+      position:relative;
+      padding-top:14px;
     }
     #timeline-embed .tl-slide .tl-text-content .resident-card + .resident-card:before{
       content:"";
@@ -226,12 +231,11 @@
       background: rgba(255,255,255,.18);
     }
 
-    /*Dividers*/
+    /* dividers */
     #timeline-embed .tl-slide .tl-text-content .divider{
-      height: 1px;
-      margin: 14px 0;
-      background: linear-gradient(
-        90deg,
+      height:1px;
+      margin:14px 0;
+      background: linear-gradient(90deg,
         rgba(255,255,255,0),
         rgba(255,255,255,.28),
         rgba(255,255,255,0)
@@ -240,96 +244,888 @@
 
     /* SOLO para la diapositiva marcada como .slide-2 */
     #timeline-embed .tl-slide:has(.slide-2) .tl-media .tl-media-content{
-      padding-top: 1px !important;  /* o 0px */
+      padding-top:1px !important;
     }
 
-    /* (lo de arriba lo dejo igual) */
-    .timeline-controls {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      padding: 10px 12px 0;
-    }
-
-    .timeline-button {
-      background: var(--color-institucional-sec);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 6px;
-      color: #ffffff;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-      padding: 6px 12px;
-      text-transform: uppercase;
-    }
-
-    .timeline-button:hover {
-      background: var(--color-institucional);
-    }
-
-    /* ==============================
-       ✅ SOLO LO NUEVO DEL TOGGLE
-       ============================== */
-
-    /* Wrap para posicionar el botón “como el otro” */
+    /* ===== Contenedor timeline ===== */
     .timeline-wrap{
-      width: 100%;
-      height: 650px;     /* tu altura original */
-      overflow: hidden;
-      position: relative;
+      width:100%;
+      height: calc(100vh - var(--franja-guinda));
+      min-height:650px;
+      overflow:hidden;
+      position:relative;
+      --collapsed-safe-bottom:90px;
+      --toggle-bottom:130px;
+      z-index:1;
     }
+
+    .timeline-wrap.is-prehide #timeline-embed{ opacity:0; }
 
     #timeline-embed{
-      width: 100%;
-      height: 100%;
+      width:100%;
+      height:100%;
+      transition: opacity .12s ease;
     }
 
-    /* evitar “blancos” cuando se oculta */
     #timeline-embed .tl-timeline,
     #timeline-embed .tl-storyslider,
     #timeline-embed .tl-storyslider .tl-slider-container{
-      background: #691C32 !important;
+      background:#691C32 !important;
     }
 
-    /* OCULTAR solo el bloque inferior (fechas) */
+    /* colapsar timenav */
     .timeline-wrap.is-collapsed #timeline-embed .tl-timenav,
     .timeline-wrap.is-collapsed #timeline-embed .tl-timenav-wrapper,
     .timeline-wrap.is-collapsed #timeline-embed .tl-timenav-container,
     .timeline-wrap.is-collapsed #timeline-embed .tl-menubar{
-      display: none !important;
-      height: 0 !important;
-      min-height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 0 !important;
+      display:none !important;
+      height:0 !important;
+      min-height:0 !important;
+      margin:0 !important;
+      padding:0 !important;
+      border:0 !important;
     }
-
-    /* que el story use todo el alto cuando se oculta la barra */
     .timeline-wrap.is-collapsed #timeline-embed .tl-storyslider{
-      bottom: 0 !important;
-      height: 100% !important;
+      bottom:0 !important;
+      height:100% !important;
+    }
+    .timeline-wrap.is-collapsed #timeline-embed .tl-slide .tl-slide-scrollable-container,
+    .timeline-wrap.is-collapsed #timeline-embed .tl-slide .tl-slide-content-container,
+    .timeline-wrap.is-collapsed #timeline-embed .tl-slide .tl-text-content{
+      
+      box-sizing:border-box;
     }
 
-    /* Botón dentro del timeline, arriba de la barra de fechas */
+    /* botón */
     .timeline-toggle{
       position:absolute;
-      right: 14px;
-      bottom: var(--toggle-bottom, 130px); /* default */
-      z-index: 99999;
+      right:14px;
+      bottom: var(--toggle-bottom);
+      z-index:99999;
       background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.45);
+      border:1px solid rgba(255,255,255,.45);
       color:#fff;
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .8px;
-      text-transform: uppercase;
+      border-radius:10px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.8px;
+      text-transform:uppercase;
       cursor:pointer;
       backdrop-filter: blur(4px);
     }
-    .timeline-toggle:hover{ background: rgba(0,0,0,.28); }
+    .timeline-toggle:hover{ background: rgba(0,0,0,.28); cursor:pointer !important; }
+
+    #toggle-timeline,
+    #toggle-timeline:hover,
+    #toggle-timeline:active,
+    #toggle-timeline:focus,
+    #toggle-timeline *{ cursor:pointer !important; }
+
+    /* Ocultar branding timeline */
+    #timeline-embed .tl-credit,
+    #timeline-embed .tl-attribution,
+    #timeline-embed .tl-attribution a,
+    #timeline-embed .tl-attribution .tl-logo,
+    #timeline-embed a.tl-logo,
+    #timeline-embed a.tl-credit,
+    .tl-credit,
+    .tl-attribution{
+      display:none !important;
+    }
+
+    /* evita brinco al cargar */
+    .timeline-wrap.is-prehide{ --toggle-bottom:10px; }
+    .timeline-wrap.is-prehide .timeline-toggle{
+      opacity:0 !important;
+      pointer-events:none !important;
+      transform: translateY(10px);
+      transition: opacity .15s ease, transform .15s ease;
+    }
+    .timeline-wrap .timeline-toggle{
+      transition: opacity .15s ease, transform .15s ease;
+    }
+
+    .tl-headline, .tl-headline-date{ display:none; }
+    .tl-text-content-container{ margin-top:-30px; }
+
+    /* =========================================================
+       TABLA CONTRATO + AVANCE (ÚNICO BLOQUE BUENO)
+       ========================================================= */
+
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato{
+      width:100% !important;
+      border-collapse: collapse !important;
+      table-layout: fixed;
+      color: var(--t-txt);
+      border:1px solid var(--t-line-strong) !important;
+      border-radius: var(--t-radius);
+      overflow:hidden;
+      background: var(--t-bg);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        0 2px 0 rgba(255,255,255,.06) inset;
+    }
+
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato th,
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato td{
+      padding:16px 14px;
+      border-bottom:1px solid var(--t-line) !important;
+      border-right:1px solid var(--t-line) !important;
+      vertical-align:middle;
+      line-height:1.25;
+    }
+
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato th:last-child,
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato td:last-child{
+      border-right:none !important;
+    }
+
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato tr:last-child th,
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato tr:last-child td{
+      border-bottom:none !important;
+    }
+
+    /* labels izquierda (Contrato/Residente/Supervisión) */
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato > tbody > tr > th{
+      width:34%;
+      text-align:left;
+      font-weight:900;
+      background: linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,.06));
+    }
+
+    /* valores */
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato td.valor{
+      color: var(--t-txt-2);
+      font-weight:700;
+    }
+
+    /* placeholders */
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato .placeholder{
+      display:inline-block;
+      padding:8px 10px;
+      border-radius:10px;
+      background: rgba(255,255,255,.07);
+      border:1px dashed rgba(255,255,255,.28);
+      color: rgba(255,255,255,.82);
+      letter-spacing:.1px;
+    }
+
+    /* td que contiene la tabla interna */
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato td[colspan="2"]{
+      padding:0 !important;
+      border-right:none !important;
+    }
+
+    /* tabla interna sin doble card */
+    #timeline-embed .tl-slide .tl-text-content .tabla-contrato td[colspan="2"] > .tabla-contrato{
+      border:none !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+      background:transparent !important;
+    }
+
+    /* ===== tabla-avance (subtabla) ===== */
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance{
+      table-layout: fixed;
+    }
+
+    /* fila 1 (Plazo/Importe/Avance) */
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:first-child th{
+      background: var(--t-bg-2);
+      font-weight:900;
+      letter-spacing:.4px;
+      padding:12px 10px;
+    }
+    /* separadores fuertes en la fila de grupos (por colspans) */
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:first-child th:nth-child(1),
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:first-child th:nth-child(2){
+      border-right:2px solid var(--t-line-strong) !important; /* fin Plazo y fin Importe */
+    }
+
+    /* fila 2 (Inicio/Fin/...) -> evita encimarse */
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:nth-child(2) th{
+      background: rgba(255,255,255,.04);
+      font-weight:800;
+      font-size:13px;
+      padding:10px 6px;
+      white-space: normal !important;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      hyphens:auto;
+      line-height:1.1;
+      text-align:center;
+    }
+
+    /* valores internos */
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance td{
+      background: var(--t-bg-3);
+      padding:10px 6px;
+      text-align:center;
+    }
+
+    /* separadores fuertes entre grupos en filas con 7 columnas */
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:nth-child(2) th:nth-child(2),
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:nth-child(3) td:nth-child(2){
+      border-right:2px solid var(--t-line-strong) !important; /* fin Plazo */
+    }
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:nth-child(2) th:nth-child(4),
+    #timeline-embed .tl-slide .tl-text-content .tabla-avance tr:nth-child(3) td:nth-child(4){
+      border-right:2px solid var(--t-line-strong) !important; /* fin Importe */
+    }
+
+    /* hover suave */
+    @media (hover:hover){
+      #timeline-embed .tl-slide .tl-text-content .tabla-contrato > tbody > tr:hover > th,
+      #timeline-embed .tl-slide .tl-text-content .tabla-contrato > tbody > tr:hover > td{
+        background: rgba(255,255,255,.035);
+      }
+    }
+
+    /* ===== Título tipo “tarjeta” (moderno, institucional) ===== */
+#timeline-embed .tl-slide .tl-text-content .titulo-foto{
+  display: inline-block;
+  margin: 10px 0 14px;
+  padding: 10px 14px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
+
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  line-height: 1.1;
+
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.30),
+    0 2px 0 rgba(255,255,255,.06) inset;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+    .ndfHFb-c4YZDc-HiaYvf-haAclf .ndfHFb-c4YZDc-TvD9Pc-qnnXGd, .ndfHFb-c4YZDc-HiaYvf-RJLb9c {
+    height: 105%;
+    position: absolute;
+    width: 100%;
+  }
+    /*estilo botón superintendente*/
+.btn-link{
+    background: linear-gradient(135deg, #691c32 0%, #8b2a43 55%, #541426 100%);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.18);
+    padding: .45rem .75rem;
+    border-radius: .75rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    box-shadow: 0 10px 22px rgba(105,28,50,.22);
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  }
+  .btn-link:hover{
+    filter: brightness(1.05);
+    box-shadow: 0 14px 28px rgba(105,28,50,.28);
+    transform: translateY(-1px);
+  }
+  .btn-link:active{
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(105,28,50,.22);
+    filter: brightness(.98);
+  }
+  .btn-link:focus-visible{
+    outline: 3px solid rgba(105,28,50,.35);
+    outline-offset: 2px;
+  }
+  .btn-link .placeholder{ color: inherit; }
+    /*Estilo cuadro de click en el boton pop up*/
+  .popbox{
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    min-width: 240px;
+    background: linear-gradient(135deg, #691c32 0%, #8b2a43 55%, #541426 100%);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 14px;
+    box-shadow: 0 18px 38px rgba(105,28,50,.28);
+    padding: 10px;
+    z-index: 999;
+    color: #fff;
+  }
+
+  .poplist li a{
+    display: block;
+    padding: 10px 10px;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .poplist li a:hover{
+    background: rgba(255,255,255,.14);
+  }
+    .pop-wrap{ position: relative; }
+    .poplist{ margin:0; padding:0; }
+/* ✅ para que el popup NO se recorte por overflow:hidden del card */
+#timeline-embed .tl-slide .tl-text-content .tabla-contrato{
+  overflow: visible !important;
+}
+
+/* el TD que contiene botón + popup debe ser relativo */
+#timeline-embed .tl-slide .tl-text-content td.pop-wrap{
+  position: relative;
+}
+
+/* por si Timeline mete el td sin especificar td */
+#timeline-embed .tl-slide .tl-text-content .pop-wrap{
+  position: relative;
+}
+    /* que NO recorte el popup */
+#timeline-embed .tl-slide .tl-text-content .tabla-contrato{
+  overflow: visible !important;
+}
+
+/* y sube el popup por si hay capas encima */
+#timeline-embed .tl-slide .tl-text-content .popbox{
+  z-index: 999999 !important;
+}
+    /*Estilo dentro de apartado diseño y construccion*/
+/* ✅ Scroll dentro del popup cuando hay mucha info */
+.popbox{
+  max-height: 280px;      /* ajusta: 220-360 según te guste */
+  overflow-y: auto;       /* activa scroll vertical */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; /* scroll suave en iPhone */
+}
+
+/* opcional: que no se desacomode el padding al aparecer el scroll */
+.popbox::-webkit-scrollbar{
+  width: 10px;
+}
+.popbox::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.22);
+  border-radius: 10px;
+}
+.popbox::-webkit-scrollbar-track{
+  background: rgba(0,0,0,.12);
+}
+/*Comentaros de diseño del codigo de la lista de representate legal, Director General, y superintendente*/
+    /* ===== POPUP: lista bonita ===== */
+#timeline-embed .popbox{
+  max-height: 300px;         /* ajusta */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* lista principal */
+#timeline-embed .popbox .poplist{
+  margin: 0;
+  padding: 6px;
+}
+
+/* cada bloque (Representante Legal / Director / Superintendente) */
+#timeline-embed .popbox .poplist > li{
+  padding: 10px 10px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.10);
+  margin: 8px 0;
+}
+
+/* el “título” del bloque = texto del LI antes del UL */
+#timeline-embed .popbox .poplist > li{
+  font-weight: 900;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1.15;
+  background: #dadbdd;
+}
+
+/* sublista */
+#timeline-embed .popbox .popsub{
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+/* items de la sublista */
+#timeline-embed .popbox .popsub > li{
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* si el texto es largo, que corte bien */
+#timeline-embed .popbox .popsub > li{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* separador suave entre subitems */
+#timeline-embed .popbox .popsub > li + li{
+  margin-top: 8px;
+}
+
+    /*Tarjetas con gradientes*/
+    /* ====== SUBITEMS con gradiente moderno (sin tocar HTML) ====== */
+#timeline-embed .popbox .popsub > li{
+  position: relative;
+  padding: 10px 12px 10px 14px;
+  border-radius: 12px;
+  margin: 8px 0 0;
+
+  /* base + brillo suave */
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.06)),
+    linear-gradient(135deg, rgba(0,0,0,.18), rgba(0,0,0,.08));
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  /* separa mejor textos largos */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* “barra” de gradiente a la izquierda para que se note separación */
+#timeline-embed .popbox .popsub > li::before{
+  content:"";
+  position:absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 999px;
+
+  background: linear-gradient(180deg,
+    rgba(255,255,255,.55),
+    rgba(255,255,255,.12)
+  );
+  opacity: .9;
+}
+
+/* un “shine” arriba para look moderno */
+#timeline-embed .popbox .popsub > li::after{
+  content:"";
+  position:absolute;
+  left: 10px;
+  right: 10px;
+  top: 7px;
+  height: 1px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  opacity: .7;
+}
+
+/* hover sutil */
+@media (hover:hover){
+  #timeline-embed .popbox .popsub > li:hover{
+    transform: translateY(-1px);
+    transition: transform .12s ease, filter .12s ease;
+    filter: brightness(1.04);
+  }
+}
+
+/* si adentro hay links (mailto), que hereden estilo limpio */
+#timeline-embed .popbox .popsub > li a{
+  color:#fff;
+  text-decoration:none;
+  border-bottom: 1px dashed rgba(255,255,255,.35);
+  font-weight: 800;
+}
+#timeline-embed .popbox .popsub > li a:hover{
+  border-bottom-color: rgba(255,255,255,.70);
+}
+/* ====== Ajuste “blanco” a tono institucional (suave) ====== */
+:root{
+  --txt-soft: rgba(243,231,235,.92);  /* blanco con tinte rosita */
+  --txt-soft-2: rgba(243,231,235,.78);
+  --guinda: #691c32;
+  --guinda-2: #8b2a43;
+  --guinda-3: #541426;
+}
+
+/* Texto general dentro del popup */
+#timeline-embed .popbox,
+#timeline-embed .popbox *{
+  color: var(--txt-soft);
+}
+
+/* ====== Tarjetitas (subitems) con gradiente guinda ====== */
+#timeline-embed .popbox .popsub{
+  margin: 8px 0 0 0;
+  padding: 0;
+}
+
+#timeline-embed .popbox .popsub > li{
+  position: relative;
+  padding: 10px 12px 10px 14px;
+  border-radius: 12px;
+  margin: 8px 0 0;
+
+  /* ✅ Gradiente guinda + capa brillo */
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.03)),
+    linear-gradient(135deg, rgba(105,28,50,.92), rgba(139,42,67,.72), rgba(84,20,38,.78));
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.25;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* barra lateral para separar visualmente */
+#timeline-embed .popbox .popsub > li::before{
+  content:"";
+  position:absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 999px;
+
+  background: linear-gradient(180deg,
+    rgba(243,231,235,.75),
+    rgba(243,231,235,.18)
+  );
+  opacity: .95;
+}
+
+/* shine superior (look moderno) */
+#timeline-embed .popbox .popsub > li::after{
+  content:"";
+  position:absolute;
+  left: 12px;
+  right: 12px;
+  top: 7px;
+  height: 1px;
+  border-radius: 999px;
+  background: rgba(243,231,235,.18);
+  opacity: .75;
+}
+
+/* Hover sutil */
+@media (hover:hover){
+  #timeline-embed .popbox .popsub > li:hover{
+    transform: translateY(-1px);
+    transition: transform .12s ease, filter .12s ease;
+    filter: brightness(1.05);
+  }
+}
+
+/* Links (mailto) dentro de las tarjetitas */
+#timeline-embed .popbox .popsub > li a{
+  color: var(--txt-soft);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(243,231,235,.38);
+  font-weight: 800;
+}
+#timeline-embed .popbox .popsub > li a:hover{
+  border-bottom-color: rgba(243,231,235,.70);
+}
+
+/* Texto secundario (si quieres bajar un poco la intensidad) */
+#timeline-embed .popbox .popsub > li small,
+#timeline-embed .popbox .popsub > li .muted{
+  color: var(--txt-soft-2);
+}
+/*Inicio modifica el texto dentro de los residentes*/
+    /* ==============================
+   ROLE CARDS + RESIDENT CARDS (look institucional moderno)
+   Pegar AL FINAL del <style>
+   ============================== */
+
+:root{
+  --card-grad: linear-gradient(135deg, rgba(105,28,50,.92) 0%, rgba(139,42,67,.78) 55%, rgba(84,20,38,.92) 100%);
+  --card-border: rgba(255,255,255,.18);
+  --txt-soft: rgba(255,255,255,.86);
+  --txt-softer: rgba(255,255,255,.72);
+  --line-soft: rgba(255,255,255,.16);
+  --line-strong: rgba(255,255,255,.28);
+}
+
+/* ==== ROLE CARD (Director/Subdirector/etc) ==== */
+#timeline-embed .tl-slide .tl-text-content .role-card{
+  background: var(--card-grad) !important;
+  border: 1px solid var(--card-border) !important;
+  border-left: 4px solid rgba(255,255,255,.26) !important;
+  border-radius: 14px !important;
+  padding: 12px 14px !important;
+  box-shadow: 0 18px 38px rgba(0,0,0,.28) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#timeline-embed .tl-slide .tl-text-content .role-title{
+  color: var(--txt-softer) !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  letter-spacing: .9px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+}
+
+#timeline-embed .tl-slide .tl-text-content .role-name{
+  color: var(--txt-soft) !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+}
+
+/* ==== DIVIDER más pro ==== */
+#timeline-embed .tl-slide .tl-text-content .divider{
+  height: 1px !important;
+  margin: 14px 0 !important;
+  background: linear-gradient(90deg, rgba(255,255,255,0), var(--line-strong), rgba(255,255,255,0)) !important;
+  opacity: .9 !important;
+}
+
+/* ==== RESIDENT CARD ==== */
+#timeline-embed .tl-slide .tl-text-content .resident-card{
+  background: linear-gradient(135deg, rgba(105,28,50,.55) 0%, rgba(0,0,0,.14) 55%, rgba(105,28,50,.40) 100%) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,.30) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* tabla interna */
+#timeline-embed .tl-slide .tl-text-content .resident-card table{
+  color: var(--txt-soft) !important;
+  font-size: 12px !important;
+}
+
+#timeline-embed .tl-slide .tl-text-content .resident-card td{
+  border-top: 1px solid var(--line-soft);
+}
+
+#timeline-embed .tl-slide .tl-text-content .resident-card tr:first-child td,
+#timeline-embed .tl-slide .tl-text-content .resident-card tr:nth-child(2) td{
+  border-top: 0;
+}
+
+/* TRAMO (1a fila, el <strong>) */
+#timeline-embed .tl-slide .tl-text-content .resident-card tr:first-child strong{
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.90);
+  letter-spacing: .6px;
+}
+
+/* Nombre (2a fila, el <strong>) */
+#timeline-embed .tl-slide .tl-text-content .resident-card tr:nth-child(2) strong{
+  color: rgba(255,255,255,.92);
+}
+
+/* Contratos (strong centrados) */
+#timeline-embed .tl-slide .tl-text-content .resident-card strong{
+  font-weight: 900;
+}
+
+/* Foto circular con “ring” */
+#timeline-embed .tl-slide .tl-text-content .resident-card img{
+  border: 2px solid rgba(255,255,255,.22) !important;
+  box-shadow: 0 14px 26px rgba(0,0,0,.35) !important;
+}
+
+/* Si pusiste inline border-left:2px solid azure; lo suavizamos sin tocar HTML */
+#timeline-embed .tl-slide .tl-text-content .resident-card td[style*="border-left:2px solid azure"]{
+  border-left: 2px solid rgba(255,255,255,.20) !important;
+}
+
+/* Texto largo (empresas) más suave y legible */
+#timeline-embed .tl-slide .tl-text-content .resident-card td{
+  color: rgba(255,255,255,.82) !important;
+}
+
+/* Opcional: mejora el espaciado vertical dentro de resident-card */
+#timeline-embed .tl-slide .tl-text-content .resident-card td{
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+/* Ajusta el encuadre dentro del círculo */
+#timeline-embed .tl-slide .tl-text-content .resident-card img{
+  object-fit: cover !important;
+  object-position: 50% 25% !important; /* 👈 sube la cara (prueba 15%–35%) */
+}
+    /*codigo para que se vea el email completo dentro de diseño y construccion*/
+    /* ===========================
+   FIX: que NO se recorten correos con "..."
+   =========================== */
+#timeline-embed .popbox .popsub > li,
+#timeline-embed .popbox .popsub > li a{
+  white-space: normal !important;     /* permite salto de línea */
+  overflow: visible !important;        /* no escondas el final */
+  text-overflow: clip !important;      /* quita el "..." */
+  max-width: none !important;
+}
+
+/* opcional: dale un poquito más de aire al popup (mejor para correos largos) */
+#timeline-embed .popbox{
+  min-width: 320px !important;
+  max-width: min(620px, calc(100vw - 28px)) !important;
+}
+    /*Mailito*/
+    /* Mailto: que se vea COMPLETO y NO sea link (sin click) */
+#timeline-embed a.tl-makelink[href^="mailto:"]{
+  pointer-events: none !important;   /* ya no se puede click */
+  cursor: text !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  color: inherit !important;
+
+  /* quita el "..." */
+  display: inline !important;
+  max-width: none !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  word-break: break-all !important;
+}
+    /*pop up ventana abre hacia arriba*/
+/* ===========================
+   FIX FINAL: POPBOX INLINE
+   (no flota, no se corta)
+   =========================== */
+#timeline-embed .popbox{
+  position: static !important;   /* <- deja de ser absoluto */
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  margin-top: 10px !important;
+  width: 90% !important;
+  max-width: 100% !important;
+  max-height: 320px !important; /* sigue teniendo scroll interno si quieres */
+  overflow-y: auto !important;
+  z-index: 1 !important;         /* ya no necesita estar arriba de todo */
+}
+/*Transition de hidden en tarjetas*/
+    #timeline-embed .popbox{
+  position: static !important;   /* <- deja de ser absoluto */
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  margin-top: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  max-height: 320px !important; /* sigue teniendo scroll interno si quieres */
+  overflow-y: auto !important;
+
+  z-index: 1 !important;         /* ya no necesita estar arriba de todo */
+}
+    /* ===== Animación para POPBOX inline ===== */
+#timeline-embed .js-popbox{
+  /* que empiece cerrado aunque no tenga hidden */
+  max-height: 0 !important;
+  opacity: 0 !important;
+  transform: translateY(-6px) !important;
+  overflow: hidden !important;
+
+  transition:
+    max-height .55s ease,
+    opacity .25s ease,
+    transform .30s ease;
+}
+
+/* estado abierto */
+#timeline-embed .js-popbox.is-open{
+  max-height: 320px !important;   /* tu limite */
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+    /* animación suave del popup (inline) */
+#timeline-embed .popbox.js-popbox{
+  /* estado cerrado */
+  max-height: 0 !important;
+  opacity: 0;
+  transform: translateY(-6px);
+  overflow: hidden !important;
+
+  transition:
+    max-height .65s ease,
+    opacity .65s ease,
+    transform .65s ease;
+}
+
+/* estado abierto */
+#timeline-embed .popbox.js-popbox.is-open{
+  max-height: 320px !important;
+  opacity: 1;
+  transform: translateY(0);
+  overflow-y: auto !important;
+  width: 90% !important;
+}
+ /*Estilo fondo letra para hijos del boton*/   
+/* ==========================
+   SOLO LETRA con “sombra”
+   SOLO para TRAMO II
+   ========================== */
+
+/* conserva tu color suave SOLO en tramo-2 */
+#timeline-embed .tabla-contrato.tramo-2 .popbox,
+#timeline-embed .tabla-contrato.tramo-2 .popbox *{
+  color: var(--txt-soft) !important;
+}
+
+/* “sombra” bonita SOLO a los títulos (Representante Legal, Director, etc) */
+#timeline-embed .tabla-contrato.tramo-2 .popbox .poplist > li{
+  text-shadow: 0 1px 0 rgba(0,0,0,.55) !important;
+}
+
+/* para que correos y subitems NO queden pesados */
+#timeline-embed .tabla-contrato.tramo-2 .popbox .popsub > li,
+#timeline-embed .tabla-contrato.tramo-2 .popbox .popsub > li *{
+  text-shadow: none !important;
+}
+/*Sombra en letras de tramo2*/
+/* ==========================
+   SOLO LETRA con “sombra”
+   SOLO para TRAMO II
+   ========================== */
+
+/* conserva tu color suave SOLO en tramo-2 */
+#timeline-embed .tabla-contrato.tramo-2 .popbox,
+#timeline-embed .tabla-contrato.tramo-2 .popbox *{
+  color: var(--txt-soft) !important;
+}
+
+/* “sombra” bonita SOLO a los títulos (Representante Legal, Director, etc) */
+#timeline-embed .tabla-contrato.tramo-2 .popbox .poplist > li{
+  text-shadow: 0 1px 0 rgba(0,0,0,.55) !important;
+}
+
+/* para que correos y subitems NO queden pesados */
+#timeline-embed .tabla-contrato.tramo-2 .popbox .popsub > li,
+#timeline-embed .tabla-contrato.tramo-2 .popbox .popsub > li *{
+  text-shadow: none !important;
+}
+
+
+
   </style>
 </head>
 
@@ -444,5 +1240,83 @@
       refreshTimelineHard();
     });
   </script>
+  <script>
+(function () {
+
+  const DUR = 650; // duración (ms) = debe empatar con el CSS de transición
+
+  function closeBox(box){
+    if (!box) return;
+    box.classList.remove('is-open');
+    if (box._hideTimer) clearTimeout(box._hideTimer);
+    box._hideTimer = setTimeout(() => { box.hidden = true; }, DUR);
+  }
+
+  function openBox(box){
+    if (!box) return;
+    if (box._hideTimer) clearTimeout(box._hideTimer);
+    box.hidden = false;
+    // siguiente frame para que la transición sí corra
+    requestAnimationFrame(() => box.classList.add('is-open'));
+  }
+
+  function closeAll(exceptBox){
+    document.querySelectorAll('#timeline-embed .js-popbox').forEach(box => {
+      if (box === exceptBox) return;
+      closeBox(box);
+    });
+
+    // aria-expanded
+    document.querySelectorAll('#timeline-embed .js-popbtn').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+    });
+
+    if (exceptBox){
+      const wrap = exceptBox.closest('.pop-wrap') || exceptBox.closest('td');
+      const btn = wrap ? wrap.querySelector('.js-popbtn') : null;
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('#timeline-embed .js-popbtn');
+    const insideBox = e.target.closest('#timeline-embed .js-popbox');
+
+    // click dentro del popup: no cierres
+    if (insideBox) return;
+
+    // click en botón: toggle
+    if (btn) {
+      const wrap = btn.closest('.pop-wrap') || btn.closest('td');
+      const box = wrap ? wrap.querySelector('.js-popbox') : null;
+      if (!box) return;
+
+      const isOpen = !box.hidden && box.classList.contains('is-open');
+
+      if (isOpen) {
+        btn.setAttribute('aria-expanded', 'false');
+        closeBox(box);
+      } else {
+        closeAll(box);
+        btn.setAttribute('aria-expanded', 'true');
+        openBox(box);
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    // click fuera: cierra todo
+    closeAll();
+  }, true);
+
+    document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAll();
+     });
+
+     })();
+</script>
 </body>
 </html>
+
