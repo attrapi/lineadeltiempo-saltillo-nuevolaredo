@@ -1134,12 +1134,12 @@
   <div class="timeline-controls"></div>
 
   <!-- Aquí se dibuja la timeline -->
-  <div id="timeline-wrap" class="timeline-wrap">
+  <div id="timeline-wrap" class="timeline-wrap is-prehide">
     <div id="timeline-embed"></div>
 
     <!-- ✅ Botón dentro del timeline (como el otro) -->
     <button class="timeline-toggle" id="toggle-timeline" type="button" aria-expanded="true">
-      OCULTAR
+        Mostrar Cronología
     </button>
   </div>
 
@@ -1169,76 +1169,97 @@
     });
 
     /* ========= ✅ TOGGLE (OCULTAR / MOSTRAR COMPLETO) + posición del botón ========= */
-    const wrap = document.getElementById('timeline-wrap');
-    const btn  = document.getElementById('toggle-timeline');
+   const wrap = document.getElementById('timeline-wrap');
+const btn  = document.getElementById('toggle-timeline');
 
-    function refreshTimelineHard(){
-      requestAnimationFrame(() => {
-        void wrap.offsetHeight;
-        window.timeline?.updateDisplay?.();
-        setTimeout(() => window.timeline?.updateDisplay?.(), 60);
-      });
+function refreshTimelineHard(){
+  requestAnimationFrame(() => {
+    void wrap.offsetHeight;
+    window.timeline?.updateDisplay?.();
+    setTimeout(() => window.timeline?.updateDisplay?.(), 60);
+    setTimeout(() => window.timeline?.updateDisplay?.(), 220);
+  });
+}
+
+function updateToggleOffset(){
+  if (wrap.classList.contains('is-collapsed')) {
+    wrap.style.setProperty('--toggle-bottom', '10px');
+    return true;
+  }
+  const nav = document.querySelector('#timeline-embed .tl-timenav');
+  const gap = 10;
+  if (!nav) return false;
+  const navH = Math.ceil(nav.getBoundingClientRect().height);
+  if (navH <= 0) return false;
+  wrap.style.setProperty('--toggle-bottom', (navH + gap) + 'px');
+  return true;
+}
+
+(function ensureFirstCorrectButtonPosition(){
+  let tries = 0;
+  const maxTries = 240;
+  const tick = () => {
+    tries++;
+    const ok = updateToggleOffset();
+    if (ok || tries >= maxTries) return;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
+
+const embed = document.getElementById('timeline-embed');
+const mo = new MutationObserver(() => updateToggleOffset());
+mo.observe(embed, { childList: true, subtree: true });
+
+(function startCollapsedAfterReady(){
+  let tries = 0;
+  const maxTries = 240;
+  const tick = () => {
+    tries++;
+    const nav = document.querySelector('#timeline-embed .tl-timenav');
+    const ok = nav && nav.getBoundingClientRect().height > 0;
+
+    if (ok) {
+      wrap.classList.add('is-collapsed');
+      wrap.classList.remove('is-prehide');
+      btn.textContent = 'Mostrar Cronología';
+      btn.setAttribute('aria-expanded', 'false');
+      wrap.style.setProperty('--toggle-bottom', '10px');
+      refreshTimelineHard();
+      return;
     }
 
-    // Pone el botón justo arriba de la barra de fechas (timenav)
-    function updateToggleOffset(){
-      // Si está colapsado (sin timenav), botón abajo
-      if (wrap.classList.contains('is-collapsed')) {
-        wrap.style.setProperty('--toggle-bottom', '10px');
-        return true;
-      }
-
-      const nav = document.querySelector('#timeline-embed .tl-timenav');
-      const gap = 10;
-      if (!nav) return false;
-
-      const navH = Math.ceil(nav.getBoundingClientRect().height);
-      if (navH <= 0) return false;
-
-      wrap.style.setProperty('--toggle-bottom', (navH + gap) + 'px');
-      return true;
+    if (tries >= maxTries) {
+      wrap.classList.remove('is-prehide');
+      refreshTimelineHard();
+      return;
     }
 
-    // Asegurar desde el PRIMER render que el botón quede arriba
-    (function ensureFirstCorrectButtonPosition(){
-      let tries = 0;
-      const maxTries = 240; // ~4s
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
 
-      const tick = () => {
-        tries++;
-        const ok = updateToggleOffset();
-        if (ok || tries >= maxTries) return;
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    })();
+btn.addEventListener('click', () => {
+  const willCollapse = !wrap.classList.contains('is-collapsed');
+  wrap.classList.toggle('is-collapsed', willCollapse);
 
-    // Observer por si TimelineJS re-renderiza el DOM
-    const embed = document.getElementById('timeline-embed');
-    const mo = new MutationObserver(() => updateToggleOffset());
-    mo.observe(embed, { childList: true, subtree: true });
+  if (willCollapse) {
+    btn.textContent = 'Mostrar Cronología';
+    btn.setAttribute('aria-expanded', 'false');
+    wrap.style.setProperty('--toggle-bottom', '10px');
+  } else {
+    btn.textContent = 'OCULTAR';
+    btn.setAttribute('aria-expanded', 'true');
+    updateToggleOffset();
+  }
+  refreshTimelineHard();
+});
 
-    btn.addEventListener('click', () => {
-      const willCollapse = !wrap.classList.contains('is-collapsed');
-      wrap.classList.toggle('is-collapsed', willCollapse);
-
-      if (willCollapse) {
-        btn.textContent = 'MOSTRAR COMPLETO';
-        btn.setAttribute('aria-expanded', 'false');
-        wrap.style.setProperty('--toggle-bottom', '10px');
-      } else {
-        btn.textContent = 'OCULTAR';
-        btn.setAttribute('aria-expanded', 'true');
-        updateToggleOffset();
-      }
-
-      refreshTimelineHard();
-    });
-
-    window.addEventListener('resize', () => {
-      updateToggleOffset();
-      refreshTimelineHard();
-    });
+window.addEventListener('resize', () => {
+  updateToggleOffset();
+  refreshTimelineHard();
+});
   </script>
   <script>
 (function () {
@@ -1319,6 +1340,7 @@
 </script>
 </body>
 </html>
+
 
 
 
